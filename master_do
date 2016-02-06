@@ -1,0 +1,77 @@
+/*
+	Datenanalyse Schmid - 2015
+								*/
+version 14
+clear all
+capture log close
+macro drop _all
+set more off
+
+//cd F:\Schmid Daten\Daten_2015\Master_with_flag
+
+global data="F:\Schmid Daten\Daten_2015\Master_with_flag\"
+//global do="E:\Masterarbeit\do\"
+//global output="E:\Masterarbeit\output\"
+
+
+cd "F:\Schmid Daten\Daten_2015\Master_with_flag"
+*******Import und Bearbeitung***************************************************
+do "Raw_data_2_workingpop.do"
+	///Rohzahlen für arbeitsfähige Bevölkerung
+do "Raw_data_2_workingpop_sex.do"
+	///Rohzahlen getrennt nach Geschlecht
+do "Raw_data_2_age.do"
+	///import age groups
+	///evtl aufteilen
+do "Raw_data_3_sex_15-64.do"
+do "Raw_data_4_edu_all.do"
+do "Raw_data_4_edu_types.do"
+do "Raw_data_5_motivation.do"
+do "Raw_data_6_occupation.do"
+
+********Datenextraktion*********************************************************
+do "Datenextraktion_gesamt.do"
+do "Datenextraktion_education.do"
+do "Datenextraktion_motivation.do"
+do "Datenextraktion_occupation.do"
+*********Datenintegration in Main Datenset**************************************
+do "Datenintegration_Main_new_15-64.do"
+do "Datenintegration_Main_occupation.do"
+**********Percantages***********************************************************
+do "atypical_types.do"
+do "create_types_motivation.do"
+do "create_types_occupation.do"
+	///Berechnung der Prozentsätze
+////////////////////////////////////////////////////////////////////////////////
+*********Analyse****************************************************************
+////////////////////////////////////////////////////////////////////////////////
+/*Stack bars
+do "Grafiken_stacked_bar.do"
+/*Grafiken Periode*/
+do "Grafiken_general_cpyears_atypical.do"
+do "Grafiken_general_cpyears_atypical_male.do"
+do "Grafiken_general_cpyears_atypical_fe.do"
+do "Grafiken_general_cpyears_parttime.do"
+do "Grafiken_general_cpyears_permpart.do"
+do "Grafiken_general_cpyears_temporary.do"
+do "Grafiken_general_cpyears_temppart.do"
+do "Grafiken_general_cpyears_tempfull.do"
+do "Grafiken_general_cpyears_soloall.do"
+do "Grafiken_general_cpyears_solofull.do"
+do "Grafiken_general_cpyears_solopart.do"
+*/
+////////////////////////////////////////////////////////////////////////////////
+**************Descriptives******************************************************
+////////////////////////////////////////////////////////////////////////////////
+do "descriptives_tablestats.do"
+
+	//changes working directory to /datafile
+cd "F:\Schmid Daten\Daten_2015\Master_with_flag"
+do "datenextraktion_excel.do"
+
+/*
+////////////////////////////////////////////////////////////////////////////////
+**************Bar graphs differences********************************************
+////////////////////////////////////////////////////////////////////////////////
+cd "F:\Schmid Daten\Daten_2015\Master_with_flag"
+do "Grafiken_bars_differences.do"
